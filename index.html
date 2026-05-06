@@ -542,25 +542,13 @@
       <img src="her-photo.jpeg" alt="Fatima Jabbar" class="photo" />
     </div>
 
-    <div class="gallery fade-in">
-      <img src="her-photo.jpeg" alt="Beautiful memory 1" />
-      <img src="her-photo.jpeg" alt="Beautiful memory 2" />
-      <img src="her-photo.jpeg" alt="Beautiful memory 3" />
-    </div>
-
     <div class="message-box">
       <div id="typedMessage" class="typed-message"></div>
       <div class="final-line hidden" id="finalLine">You are truly unforgettable. 🌸</div>
     </div>
 
     <button onclick="toggleMusic()">Play / Pause Music</button>
-    <button onclick="showLetter()">Read Secret Letter 💌</button>
 
-    <div id="secretLetter" class="secret-letter hidden">
-      You are one of the rare people who leave warmth behind in every conversation, every smile, and every memory.<br><br>
-      This page may just be code and design, but the feelings behind it are very real.<br><br>
-      Some people become unforgettable without even trying. 🌸
-    </div>
 
     <button class="secondary-btn" onclick="goBack()">Back</button>
     <p class="music-note">Put <strong>music.mp3</strong> in the same folder for automatic music.</p>
@@ -646,10 +634,6 @@ Some souls are unforgettable. 🌸`;
       }
     }
 
-    function showLetter() {
-      document.getElementById("secretLetter").classList.toggle("hidden");
-    }
-
     async function showCountdown() {
       const countdown = document.getElementById("countdown");
 
@@ -726,7 +710,6 @@ Some souls are unforgettable. 🌸`;
       document.getElementById("specialPage").classList.add("hidden");
       document.getElementById("otherPage").classList.add("hidden");
       document.getElementById("loginCard").classList.remove("hidden");
-      document.getElementById("secretLetter").classList.add("hidden");
 
       clearInterval(typingInterval);
       document.getElementById("typedMessage").innerHTML = "";

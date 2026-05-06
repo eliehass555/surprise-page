@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Special Surprise Page</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Poppins", "Segoe UI", sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      background:
+        radial-gradient(circle at top, rgba(255,255,255,0.7), transparent 30%),
+        linear-gradient(135deg, #fff1f6 0%, #ffe3ee 45%, #fff7f2 100%);
+    }
+
+    .background-hearts,
+    .petals {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+
+    .heart,
+    .petal {
+      position: absolute;
+      opacity: 0.18;
+    }
+
+    .heart {
+      bottom: -40px;
+      font-size: 28px;
+      animation: floatUp linear infinite;
+    }
+
+    .heart:nth-child(1) { left: 6%; animation-duration: 10s; }
+    .heart:nth-child(2) { left: 15%; animation-duration: 12s; }
+    .heart:nth-child(3) { left: 24%; animation-duration: 14s; }
+    .heart:nth-child(4) { left: 38%; animation-duration: 11s; }
+    .heart:nth-child(5) { left: 51%; animation-duration: 15s; }
+    .heart:nth-child(6) { left: 67%; animation-duration: 12s; }
+    .heart:nth-child(7) { left: 79%; animation-duration: 13s; }
+    .heart:nth-child(8) { left: 90%; animation-duration: 16s; }
+
+    .petal {
+      top: -30px;
+      font-size: 24px;
+      animation: fallDown linear infinite;
+    }
+
+    .petal:nth-child(1) { left: 8%; animation-duration: 11s; }
+    .petal:nth-child(2) { left: 21%; animation-duration: 13s; }
+    .petal:nth-child(3) { left: 34%; animation-duration: 10s; }
+    .petal:nth-child(4) { left: 47%; animation-duration: 14s; }
+    .petal:nth-child(5) { left: 60%; animation-duration: 12s; }
+    .petal:nth-child(6) { left: 73%; animation-duration: 15s; }
+    .petal:nth-child(7) { left: 86%; animation-duration: 11s; }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(0.9);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.18;
+      }
+      100% {
+        transform: translateY(-115vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    @keyframes fallDown {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      15% {
+        opacity: 0.22;
+      }
+      100% {
+        transform: translateY(110vh) translateX(50px) rotate(240deg);
+        opacity: 0;
+      }
+    }
+
+    .card {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      max-width: 720px;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.8);
+      border-radius: 32px;
+      padding: 42px 34px;
+      box-shadow: 0 30px 70px rgba(174, 51, 107, 0.18);
+      text-align: center;
+      animation: fadeInUp 0.8s ease;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: #fff0f7;
+      border: 1px solid #ffd2e5;
+      color: #c22d72;
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      font-size: 42px;
+      color: #bf236a;
+      margin-bottom: 14px;
+      line-height: 1.2;
+    }
+
+    .subtitle {
+      color: #6d5961;
+      font-size: 20px;
+      line-height: 1.8;
+      margin-bottom: 24px;
+    }
+
+    .input-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 18px;
+      border: 1px solid #f2c8d9;
+      border-radius: 18px;
+      font-size: 19px;
+      outline: none;
+      background: rgba(255,255,255,0.95);
+      transition: 0.25s ease;
+    }
+
+    input:focus {
+      border-color: #d63384;
+      box-shadow: 0 0 0 4px rgba(214, 51, 132, 0.12);
+    }
+
+    button {
+      width: 100%;
+      padding: 17px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #d63384, #ff5ca8);
+      color: white;
+      font-size: 19px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 14px 26px rgba(214, 51, 132, 0.24);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 30px rgba(214, 51, 132, 0.28);
+    }
+
+    .secondary-btn {
+      margin-top: 14px;
+      background: linear-gradient(135deg, #8c3c62, #b14b7d);
+      box-shadow: 0 14px 24px rgba(140, 60, 98, 0.2);
+    }
+
+    .tiny-note {
+      margin-top: 16px;
+      font-size: 16px;
+      color: #88757c;
+    }
+
+    .gift-box {
+      width: 140px;
+      height: 140px;
+      margin: 10px auto 20px;
+      border-radius: 30px;
+      background: linear-gradient(135deg, #ff4fa3, #d63384);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 25px 45px rgba(214, 51, 132, 0.35);
+      font-size: 70px;
+      cursor: pointer;
+      animation: giftBounce 1.8s infinite;
+      user-select: none;
+    }
+
+    .bouquet {
+      font-size: 110px;
+      margin: 12px 0 10px;
+      animation: pulse 2.2s ease-in-out infinite;
+    }
+
+    .photo-frame {
+      width: 320px;
+      height: 320px;
+      margin: 22px auto 24px;
+      padding: 8px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ffd1e5, #fff5fa, #ffc0dc);
+      box-shadow: 0 20px 38px rgba(191, 35, 106, 0.2);
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: top;
+      display: block;
+      background: #f8dce7;
+    }
+
+    .message-box {
+      margin-top: 10px;
+      padding: 24px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(255,244,249,0.96));
+      border: 1px solid #ffd9e8;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.85);
+    }
+
+    .typed-message {
+      min-height: 150px;
+      color: #5d4d54;
+      font-size: 20px;
+      line-height: 1.9;
+      text-align: left;
+      white-space: pre-line;
+    }
+
+    .typed-message .cursor {
+      display: inline-block;
+      animation: blink 0.8s infinite;
+      color: #c22d72;
+      font-weight: 700;
+    }
+
+    .final-line {
+      margin-top: 14px;
+      color: #c22d72;
+      font-size: 24px;
+      font-weight: 700;
+    }
+
+    .music-note {
+      margin-top: 14px;
+      font-size: 15px;
+      color: #826f76;
+    }
+
+    .other-title {
+      color: #8c3c62;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+
+    @keyframes giftBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @keyframes blink {
+      0%, 50% { opacity: 1; }
+      51%, 100% { opacity: 0; }
+    }
+
+    @media (max-width: 640px) {
+      .card {
+        padding: 28px 20px;
+        border-radius: 24px;
+      }
+
+      h1 {
+        font-size: 32px;
+      }
+
+      .subtitle {
+        font-size: 17px;
+      }
+
+      .photo-frame {
+        width: 240px;
+        height: 240px;
+      }
+
+      .typed-message {
+        min-height: 170px;
+        font-size: 17px;
+      }
+
+      .gift-box {
+        width: 120px;
+        height: 120px;
+        font-size: 58px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-hearts">
+    <span class="heart">💗</span>
+    <span class="heart">💖</span>
+    <span class="heart">🌸</span>
+    <span class="heart">💗</span>
+    <span class="heart">💐</span>
+    <span class="heart">💖</span>
+    <span class="heart">🌷</span>
+    <span class="heart">💗</span>
+  </div>
+
+  <div class="petals">
+    <span class="petal">🌹</span>
+    <span class="petal">🌸</span>
+    <span class="petal">🌷</span>
+    <span class="petal">🌹</span>
+    <span class="petal">🌸</span>
+    <span class="petal">🌷</span>
+    <span class="petal">🌹</span>
+  </div>
+
+  <div class="card" id="loginCard">
+    <div class="badge">A private little surprise</div>
+    <div class="gift-box" onclick="openGift()">🎁</div>
+    <p class="tiny-note">Click the gift 🎁</p>
+
+    <h1>Welcome</h1>
+    <p class="subtitle">Enter your full name to see whether this page was secretly made for you.</p>
+
+    <div class="input-wrap">
+      <input type="text" id="nameInput" placeholder="Type your full name here" />
+      <button onclick="checkName()">Open My Surprise</button>
+    </div>
+
+    <p class="tiny-note">Only one special person will unlock the real page.</p>
+  </div>
+
+  <div class="card hidden" id="specialPage">
+    <div class="badge">Reserved for someone special</div>
+    <h1>For Fatima Jabbar 💖</h1>
+    <div class="bouquet">💐</div>
+
+    <div class="photo-frame">
+      <img src="her-photo.jpeg" alt="Fatima Jabbar" class="photo" />
+    </div>
+
+    <div class="message-box">
+      <div id="typedMessage" class="typed-message"></div>
+      <div class="final-line hidden" id="finalLine">You are truly unforgettable. 🌸</div>
+    </div>
+
+    <button onclick="toggleMusic()">Play / Pause Music</button>
+    <button class="secondary-btn" onclick="goBack()">Back</button>
+    <p class="music-note">Put <strong>music.mp3</strong> in the same folder for automatic music.</p>
+  </div>
+
+  <div class="card hidden" id="otherPage">
+    <div class="badge">Access denied 😄</div>
+    <h1 class="other-title">Oops, not this time</h1>
+    <p class="subtitle">This page is lovingly reserved for someone else. Nice try though, bro.</p>
+    <button class="secondary-btn" onclick="goBack()">Try Again</button>
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="music.mp3" type="audio/mpeg" />
+  </audio>
+
+  <script>
+    const specialName = "fatima jabbar";
+
+    const message = `Some people simply exist, and some people make the world feel softer, brighter, and more beautiful.
+
+This little page was made with care, admiration, and a genuine wish to make you smile.
+
+You carry a kind of beauty that goes beyond appearance — it is in your presence, your warmth, and the feeling you leave behind.`;
+
+    let typingInterval;
+    let typingIndex = 0;
+
+    function openGift() {
+      checkName();
+    }
+
+    function checkName() {
+      const enteredName = document.getElementById("nameInput").value.trim().toLowerCase();
+      const targetName = specialName.toLowerCase();
+
+      document.getElementById("loginCard").classList.add("hidden");
+      document.getElementById("specialPage").classList.add("hidden");
+      document.getElementById("otherPage").classList.add("hidden");
+
+      if (enteredName === targetName) {
+        document.getElementById("specialPage").classList.remove("hidden");
+        startTyping();
+
+        const music = document.getElementById("bgMusic");
+        music.play().catch(() => {});
+      } else {
+        document.getElementById("otherPage").classList.remove("hidden");
+      }
+    }
+
+    function startTyping() {
+      clearInterval(typingInterval);
+      typingIndex = 0;
+
+      const typedMessage = document.getElementById("typedMessage");
+      const finalLine = document.getElementById("finalLine");
+
+      finalLine.classList.add("hidden");
+      typedMessage.innerHTML = '<span class="cursor">|</span>';
+
+      typingInterval = setInterval(() => {
+        if (typingIndex < message.length) {
+          const visibleText = message
+            .slice(0, typingIndex + 1)
+            .replace(/\n/g, "<br><br>");
+
+          typedMessage.innerHTML = visibleText + '<span class="cursor">|</span>';
+          typingIndex++;
+        } else {
+          clearInterval(typingInterval);
+          typedMessage.innerHTML = message.replace(/\n/g, "<br><br>");
+          finalLine.classList.remove("hidden");
+        }
+      }, 30);
+    }
+
+    function goBack() {
+      document.getElementById("nameInput").value = "";
+      document.getElementById("specialPage").classList.add("hidden");
+      document.getElementById("otherPage").classList.add("hidden");
+      document.getElementById("loginCard").classList.remove("hidden");
+
+      clearInterval(typingInterval);
+      document.getElementById("typedMessage").innerHTML = "";
+      document.getElementById("finalLine").classList.add("hidden");
+
+      const music = document.getElementById("bgMusic");
+      music.pause();
+      music.currentTime = 0;
+    }
+
+    function toggleMusic() {
+      const music = document.getElementById("bgMusic");
+
+      if (music.paused) {
+        music.play().catch(() => {
+          alert("Add music.mp3 in same folder");
+        });
+      } else {
+        music.pause();
+      }
+    }
+
+    document.getElementById("nameInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        checkName();
+      }
+    });
+  </script>
+</body>
+</html>
